@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <style>
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                margin: 0;
+            }
+
+            nav {
+                position: fixed;
+            }
+
+            nav a {
+                border: 5px solid white;
+                border-radius: 50%;
+                display: block;
+                margin: 5px;
+                height: 40px;
+                width: 40px;
+            }
+
+            section {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                font-size: xx-large;
+            }
+
+            #one,
+            nav a:nth-of-type(1) {
+                background-color: aqua;
+            }
+
+            #two,
+            nav a:nth-of-type(2) {
+                background-color: burlywood;
+            }
+
+            #three,
+            nav a:nth-of-type(3) {
+                background-color: gray;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <a href="#one"></a>
+            <a href="#two"></a>
+            <a href="#three"></a>
+        </nav>
+        <section id="one">One</section>
+        <section id="two">Two</section>
+        <section id="three">Three</section>
+    </body>
+</html>
