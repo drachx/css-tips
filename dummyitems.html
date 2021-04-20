@@ -1,0 +1,102 @@
+<html>
+<head>
+<script>
+var containerClass = "flex";
+var itemClass = "flex-item"
+var dummyClass = "dummy";
+
+var container = $("." + containerClass);
+var item = $("." + itemClass).not("." + dummyClass);
+var totalItem = item.length;
+
+var createDummy = (container, counter) => {
+	if (counter > 0) {
+    	console.log("creating dummy");
+    	container.append(`<div class='${itemClass} dummy'></div>`);
+		createDummy(container, counter - 1);
+    }
+}
+
+$(window).resize(() => {
+	var dummy = $("." + dummyClass);
+    dummy.each((index) => dummy[index].remove());
+    
+	var extraContainerSize = 4;
+    var gridWidth = Math.floor(container.width());
+    var itemWidth = Math.floor(item.outerWidth()) + extraContainerSize;
+    var columnCount = Math.floor(gridWidth / itemWidth);
+    var dummyCount = columnCount - (totalItem % columnCount);
+    if (totalItem > columnCount) {
+		createDummy(container, dummyCount);
+    }
+	
+    console.log("LOG: ", gridWidth, itemWidth, totalItem, columnCount, dummyCount);
+});
+
+</script>
+
+<style>
+  
+.flex-item, .grid-item {
+  box-sizing: border-box;
+}
+
+.flex {
+  border: solid 1px #ccc;
+  margin-bottom: 20px;
+  padding: 2px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-item {
+  margin: 2px;
+  border: solid 1px #bad;
+  min-width: 100px;
+  border-radius: 4px;
+  /*flex: 1 1 100px;*/
+}
+
+
+.grid {
+  border: solid 1px #ccc;
+  margin-bottom: 20px;
+  padding: 4px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  grid-gap: 4px;
+  grid-auto-flow: dense;
+}
+
+.grid-item {
+  border: solid 1px #bad;
+  min-width: 100px;
+  border-radius: 4px;
+}
+  
+</style>
+</head>
+<body>
+  <div class="flex">
+  <div class="flex-item">1</div>
+  <div class="flex-item">2</div>
+  <div class="flex-item">3</div>
+  <div class="flex-item">4</div>
+  <div class="flex-item">5</div>
+  <div class="flex-item">6</div>
+  <div class="flex-item">7</div>
+</div>
+
+
+<div class="grid">
+  <div class="grid-item">1</div>
+  <div class="grid-item">2</div>
+  <div class="grid-item">3</div>
+  <div class="grid-item">4</div>
+  <div class="grid-item">5</div>
+  <div class="grid-item">6</div>
+  <div class="grid-item">7</div>
+</div>
+
+</body>
+</html>
