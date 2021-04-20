@@ -1,40 +1,41 @@
 <!-- PREVIEW: https://htmlpreview.github.io/?https://github.com/drachx/css-tips/blob/master/dummyitems.html -->
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
 <script>
-var containerClass = "flex";
-var itemClass = "flex-item"
-var dummyClass = "dummy";
+$(document).ready(function () {
+    var containerClass = "flex";
+    var itemClass = "flex-item"
+    var dummyClass = "dummy";
 
-var container = $("." + containerClass);
-var item = $("." + itemClass).not("." + dummyClass);
-var totalItem = item.length;
+    var container = $("." + containerClass);
+    var item = $("." + itemClass).not("." + dummyClass);
+    var totalItem = item.length;
 
-var createDummy = (container, counter) => {
-	if (counter > 0) {
-    	console.log("creating dummy");
-    	container.append(`<div class='${itemClass} dummy'></div>`);
-		createDummy(container, counter - 1);
+    var createDummy = (container, counter) => {
+        if (counter > 0) {
+            console.log("creating dummy");
+            container.append(`<div class='${itemClass} dummy'></div>`);
+            createDummy(container, counter - 1);
+        }
     }
-}
 
-$(window).resize(() => {
-	var dummy = $("." + dummyClass);
-    dummy.each((index) => dummy[index].remove());
-    
-	var extraContainerSize = 4;
-    var gridWidth = Math.floor(container.width());
-    var itemWidth = Math.floor(item.outerWidth()) + extraContainerSize;
-    var columnCount = Math.floor(gridWidth / itemWidth);
-    var dummyCount = columnCount - (totalItem % columnCount);
-    if (totalItem > columnCount) {
-		createDummy(container, dummyCount);
-    }
-	
-    console.log("LOG: ", gridWidth, itemWidth, totalItem, columnCount, dummyCount);
-});
-
+    $(window).resize(() => {
+        var dummy = $("." + dummyClass);
+        dummy.each((index) => dummy[index].remove());
+        
+        var extraContainerSize = 4;
+        var gridWidth = Math.floor(container.width());
+        var itemWidth = Math.floor(item.outerWidth()) + extraContainerSize;
+        var columnCount = Math.floor(gridWidth / itemWidth);
+        var dummyCount = columnCount - (totalItem % columnCount);
+        if (totalItem > columnCount) {
+            createDummy(container, dummyCount);
+        }
+        
+        console.log("LOG: ", gridWidth, itemWidth, totalItem, columnCount, dummyCount);
+    });
+})
 </script>
 
 <style>
